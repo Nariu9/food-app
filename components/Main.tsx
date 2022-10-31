@@ -1,5 +1,8 @@
 import React from 'react';
 import {Dimensions, FlatList, Image, ListRenderItem, StyleSheet, Text, View} from 'react-native';
+import {Header} from './Header';
+import {Search} from './Search';
+import {Categories} from './Categories';
 
 const {width} = Dimensions.get('screen')
 const WIDTH = width
@@ -45,21 +48,23 @@ export const Main = () => {
 
     return (
         <View style={styles.main}>
-            <View style={styles.titleBlock}>
-                <Text style={styles.mainTitle}>Main Course</Text>
-                <Text style={styles.mainFilter}>See All</Text>
-            </View>
             <FlatList
-                /*ListHeaderComponent={()=><View style={styles.titleBlock}>
-                    <Text style={styles.mainTitle}>Main Course</Text>
-                    <Text style={styles.mainFilter}>See All</Text>
-                </View>}*/
+                ListHeaderComponent={() =>
+                    <>
+                        <Header/>
+                        <Search/>
+                        <Categories/>
+                        <View style={styles.titleBlock}>
+                            <Text style={styles.mainTitle}>Main Course</Text>
+                            <Text style={styles.mainFilter}>See All</Text>
+                        </View>
+                    </>}
                 ListEmptyComponent={() => <View><Text>List is empty</Text></View>}
                 data={arrData}
                 renderItem={render}
                 numColumns={NUM_COL}
                 columnWrapperStyle={{justifyContent: 'space-between'}}
-            showsVerticalScrollIndicator={false}/>
+                showsVerticalScrollIndicator={false}/>
 
         </View>
     );
